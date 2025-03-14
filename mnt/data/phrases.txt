@@ -1,0 +1,6 @@
+{player1}, bois 2 gorgées !
+{player1} et {player2}, échangez vos places.
+Tout le monde trinque, sauf {player1}.
+{player1}, choisis un joueur pour boire 3 gorgées.
+Le dernier à dire 'Santé', boit 2 gorgées.
+{player1}, fais un gage choisi par {player2} !

@@ -1,0 +1,7 @@
+{player1} doit parler avec un accent du sud
+{player1} doit parler avec un accent alsacien
+Virus accent : si quelqu’un te dit oui ou non pendant l’infection il prend aussi l’accent 
+{player1} ne peut plus parler qu’en verlan
+{player1} doit s’exprimer en allemand à partir de maintenant
+{player1} doit parler au ralenti 
+{player1} doit tenir la main de {player2}
