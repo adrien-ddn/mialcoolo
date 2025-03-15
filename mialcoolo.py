@@ -144,7 +144,7 @@ class Mialcoolo:
     def get_random_phrase(self):
         chance = random.randint(1, 100)
 
-        if chance <= 85:
+        if chance <= 88:
             with open("mnt/data/phrases.txt", "r", encoding="utf-8") as file:
                 phrases = file.readlines()
 
@@ -157,7 +157,7 @@ class Mialcoolo:
                 player2 = player1
     
             phrase = random.choice(phrases)
-            full_phrase = phrase.replace("{player1}", player1).replace("{player2}", player2)
+            full_phrase = phrase.replace("{player1}", player1).replace("{player2}", player2).replace("{n}",str(random.randint(1,3)))
             if "," in full_phrase:
                 parts = full_phrase.split(",", 1)
                 part1 = parts[0]
@@ -216,8 +216,8 @@ class Mialcoolo:
             self.canvas.create_window(680, 420, window=self.virus_frame, anchor="center")
 
             tk.Label(
-            self.virus_frame, text=part1, font=("Arial", 18, "bold"), 
-            bg="#ff89d6", fg="white", wraplength=500
+                self.virus_frame, text=part1, font=("Arial", 18, "bold"), 
+                bg="#ff89d6", fg="white", wraplength=500
             ).pack()
         else:
             self.phrase_font = font.Font(family="Baguet Script", size=40, weight="bold")
@@ -226,7 +226,20 @@ class Mialcoolo:
             self.canvas.create_text(560, 240, text=part1, font=self.phrase_font, fill="black", width=800, anchor="center")
             self.canvas.create_text(720, 480, text=part2, font=self.phrase_font, fill="black", width=800, anchor="center")
 
-    # Ajout des boutons
+            # Vérifier si la phrase contient "gorgées" et afficher l'image et le nombre
+            if "gorgées" in part1 or "gorgées" in part2:
+                import re
+                match = re.search(r"(\d+) gorgées", part1) or re.search(r"(\d+) gorgées", part2)
+                if match:
+                    gorgées_count = match.group(1) + " gorgées"
+                    try:
+                        self.gorgées_image = PhotoImage(file="mnt/data/gorgees.png")
+                        self.canvas.create_image(5, 5, image=self.gorgées_image, anchor="nw")
+                        self.canvas.create_text(110, 50, text=gorgées_count, font=("Arial", 14, "bold"), fill="black", anchor="nw")
+                    except tk.TclError:
+                        messagebox.showerror("Erreur", "Impossible de charger l'image des gorgées.")
+
+        # Ajout des boutons
         self.btn_prev = tk.Button(self.root, bg="#22b14c", fg="white", font=("Arial", 28, "bold"), text="⬅", width=3, height=1, command=self.previous_phrase)
         self.btn_next = tk.Button(self.root, bg="#22b14c", fg="white", font=("Arial", 28, "bold"), text="➡", width=3, height=1, command=self.next_phrase)
         self.btn_stop = tk.Button(self.root, bg="red", fg="white", text="X", font=("Arial", 24, "bold"), width=3, height=1, command=self.start_screen)
